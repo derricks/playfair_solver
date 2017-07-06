@@ -26,3 +26,19 @@ func TestEncryption(test *testing.T) {
    test.Fatalf("Expected UGRMKCSXHMUFMKBTOXGCMVATLUIV, but got %s", encodedString)
  }
 }
+
+func TestPandaExamples(test *testing.T) {
+  testCases := [][]string {
+    {"NYPDBLUE", "HILLSTREETBLUES", "IKATCMXMAWLWNCEARZ"},
+  }
+  
+  for _, testCase := range testCases {
+    square := KeySquareFromString(testCase[0])
+    encodedString := square.EncryptString(testCase[1])
+    
+    if encodedString != testCase[2] {
+      test.Fatalf("With keyword %s, expected %s to encode to %s. Was: %s", testCase[0], testCase[1], testCase[2], encodedString)
+    }
+  }
+
+}
