@@ -33,10 +33,51 @@ func (square KeySquare) Get(row int, column int) string {
   return square.square[column][row]
 }
 
-func (square KeySquare) EncryptString(digraph string) string {
-  //letters := strings.Split(digraph, "")
+func (square KeySquare) EncryptString(plaintext string) string {
+  var returnBuffer bytes.Buffer
   
-  return ""
+  // todo: strip non-letters
+  dedupedString := padOutDoubleLetters(strings.ToUpper(plaintext))
+  if len(dedupedString) % 2 == 1 {
+    return square.EncryptString(dedupedString + "X")
+  }
+  
+  for digraphStart := 0; digraphStart < len(dedupedString) - 1; digraphStart += 2 {
+   digraph := []string{string(dedupedString[digraphStart]), string(dedupedString[digraphStart + 1])}
+   returnBuffer.WriteString(square.encodeDigraph(digraph))   
+  }
+  return returnBuffer.String()
+}
+
+func (square KeySquare) encodeDigraph(digraph []string) string {  
+  first_coords := square.index[digraph[0]]
+  second_coords := square.index[digraph[1]]
+  
+  if (first_coords.row != second_coords.row && first_coords.column != second_coords.column) {
+    return square.Get(first_coords.row, second_coords.column) + 
+           square.Get(second_coords.row, first_coords.column)
+  } else if first_coords.row == second_coords.row {
+    // wraparound case
+    if second_coords.column == 4 {
+      return square.Get(first_coords.row, first_coords.column + 1) +
+             square.Get(second_coords.row, 0)
+    } else {
+      return square.Get(first_coords.row, first_coords.column + 1) +
+             square.Get(second_coords.row, second_coords.column + 1)
+    }
+  } else {
+    // columns are equal
+    if second_coords.row == 4 {
+      return square.Get(first_coords.row + 1, first_coords.column) +
+             square.Get(0, second_coords.column)
+    } else {
+      return square.Get(first_coords.row + 1, first_coords.column) +
+             square.Get(second_coords.row + 1, second_coords.column)
+      
+    }    
+  }
+  
+  
 }
 
 // playfair specifies that any doubled letters should be interrupted with X's

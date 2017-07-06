@@ -18,3 +18,11 @@ func TestPadDoubleLetters(test *testing.T) {
     test.Fatalf("Expected HILXLSTREXETBLUES, got %s", paddedString)
   }
 }
+
+func TestEncryption(test *testing.T) {
+ square := KeySquareFromString("monarchy")
+ encodedString := square.EncryptString("wearediscoveredsaveyourself")
+ if encodedString != "UGRMKCSXHMUFMKBTOXGCMVATLUIV" {
+   test.Fatalf("Expected UGRMKCSXHMUFMKBTOXGCMVATLUIV, but got %s", encodedString)
+ }
+}

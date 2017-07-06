@@ -16,5 +16,5 @@ func main() {
    // see if it maps to the equivalent ciphertext. If all parse,
    // match.
    square := wordsquare.KeySquareFromString("monarchy")
-   fmt.Println(square)
+   fmt.Println(square.EncryptString("wearediscoveredsaveyourself"))
 }
