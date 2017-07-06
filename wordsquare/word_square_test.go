@@ -30,6 +30,8 @@ func TestEncryption(test *testing.T) {
 func TestPandaExamples(test *testing.T) {
   testCases := [][]string {
     {"NYPDBLUE", "HILLSTREETBLUES", "IKATCMXMAWLWNCEARZ"},
+    {"BROOKLYNNINENINE", "HOMICIDELIFEONTHESTREXET", "FLQYFYGNOAGIRIZTGXPLGKAS"},
+    {"THESHIELD", "NCISNEWORLEANS", "UNTIKIVPOBAKMI"},
   }
   
   for _, testCase := range testCases {

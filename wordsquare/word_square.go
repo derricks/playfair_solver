@@ -61,6 +61,10 @@ func (square KeySquare) encodeDigraph(digraph []string) string {
     if second_coords.column == 4 {
       return square.Get(first_coords.row, first_coords.column + 1) +
              square.Get(second_coords.row, 0)
+    } else if first_coords.column == 4 {
+      return square.Get(first_coords.row, 0) +
+             square.Get(second_coords.row, second_coords.column+1)
+      
     } else {
       return square.Get(first_coords.row, first_coords.column + 1) +
              square.Get(second_coords.row, second_coords.column + 1)
@@ -70,10 +74,12 @@ func (square KeySquare) encodeDigraph(digraph []string) string {
     if second_coords.row == 4 {
       return square.Get(first_coords.row + 1, first_coords.column) +
              square.Get(0, second_coords.column)
+    } else if first_coords.row == 4 {
+      return square.Get(0, first_coords.column) +
+             square.Get(second_coords.row + 1, second_coords.column)
     } else {
       return square.Get(first_coords.row + 1, first_coords.column) +
              square.Get(second_coords.row + 1, second_coords.column)
-      
     }    
   }
   
