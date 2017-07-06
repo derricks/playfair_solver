@@ -39,6 +39,24 @@ func (square KeySquare) EncryptString(digraph string) string {
   return ""
 }
 
+// playfair specifies that any doubled letters should be interrupted with X's
+// e.g.: HILLSTREETBLUES becomes HILXLSTREXETBLUES
+func padOutDoubleLetters(instring string) string {
+  var buffer bytes.Buffer
+  previousLetter := ""
+  letters := strings.Split(instring, "")
+  for _, letter := range letters {
+    if letter == previousLetter {
+      buffer.WriteString("X")
+    }
+    
+    buffer.WriteString(letter)
+    previousLetter = letter
+  }
+  return buffer.String()
+}
+
+
 func (square KeySquare) String() string {
   var buffer bytes.Buffer
   for row := 0; row < 5; row++ {
