@@ -19,6 +19,13 @@ func TestPadDoubleLetters(test *testing.T) {
   }
 }
 
+func TestPadDoubleLettersWithX(test *testing.T) {
+  paddedString := padOutDoubleLetters("AFFLUX")
+  if paddedString != "AFXFLUX" {
+    test.Fatalf("Expected AFXFLUX, got %s", paddedString)
+  }
+}
+
 func TestEncryption(test *testing.T) {
  square := KeySquareFromString("monarchy")
  encodedString := square.EncryptString("wearediscoveredsaveyourself")
@@ -47,3 +54,4 @@ func TestPandaExamples(test *testing.T) {
   }
 
 }
+

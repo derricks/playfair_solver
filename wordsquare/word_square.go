@@ -39,7 +39,7 @@ func (square KeySquare) EncryptString(plaintext string) string {
   // todo: strip non-letters
   dedupedString := padOutDoubleLetters(strings.ToUpper(plaintext))
   if len(dedupedString) % 2 == 1 {
-    return square.EncryptString(dedupedString + "X")
+    dedupedString = dedupedString + "X"
   }
   
   for digraphStart := 0; digraphStart < len(dedupedString) - 1; digraphStart += 2 {
@@ -81,9 +81,7 @@ func (square KeySquare) encodeDigraph(digraph []string) string {
       return square.Get(first_coords.row + 1, first_coords.column) +
              square.Get(second_coords.row + 1, second_coords.column)
     }    
-  }
-  
-  
+  }  
 }
 
 // playfair specifies that any doubled letters should be interrupted with X's
